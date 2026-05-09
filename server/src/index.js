@@ -30,7 +30,7 @@ app.use(
   })
 );
 
-app.get("/api/health", (_req, res) => {
+app.get("https://aarinkabackend.vercel.app/api/health", (_req, res) => {
   res.json({ ok: true, name: "aarnika-server" });
 });
 
