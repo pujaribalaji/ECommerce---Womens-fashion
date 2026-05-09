@@ -33,7 +33,7 @@ export type Product = {
 };
 
 export async function fetchCollections() {
-  const { data } = await api.get<{ items: Collection[] }>("/api/collections");
+  const { data } = await api.get<{ items: Collection[] }>("https://aarinkabackend.vercel.app/api/collections");
   return data.items;
 }
 
@@ -43,14 +43,14 @@ export async function fetchProducts(params?: {
   category?: string;
   sort?: "featured" | "price-asc" | "price-desc" | "new";
 }) {
-  const { data } = await api.get<{ items: Product[] }>("/api/products", {
+  const { data } = await api.get<{ items: Product[] }>("https://aarinkabackend.vercel.app/api/products", {
     params
   });
   return data.items;
 }
 
 export async function fetchProduct(slug: string) {
-  const { data } = await api.get<{ item: Product }>(`/api/products/${slug}`);
+  const { data } = await api.get<{ item: Product }>(`https://aarinkabackend.vercel.app/api/products/${slug}`);
   return data.item;
 }
 
@@ -72,7 +72,7 @@ export async function createRazorpayOrder(amountInr: number) {
     orderId: string;
     amount: number;
     currency: string;
-  }>("/api/payments/razorpay/order", {
+  }>("https://aarinkabackend.vercel.app/api/payments/razorpay/order", {
     amountInr,
     receipt: `aarnika_${Date.now()}`
   });
@@ -85,7 +85,7 @@ export async function verifyRazorpaySignature(payload: {
   razorpay_signature: string;
 }) {
   const { data } = await api.post<{ ok: boolean }>(
-    "/api/payments/razorpay/verify",
+    "https://aarinkabackend.vercel.app/api/payments/razorpay/verify",
     payload
   );
   return data.ok;
@@ -117,7 +117,7 @@ export async function createOrder(payload: {
     orderId: string;
     orderNo: string;
     ownerNotifyUrl: string | null;
-  }>("/api/orders", payload);
+  }>("https://aarinkabackend.vercel.app/api/orders", payload);
   return data;
 }
 
@@ -125,7 +125,7 @@ export async function fetchPublicContact() {
   const { data } = await api.get<{
     ownerWhatsAppDigits: string | null;
     hasOwnerWhatsApp: boolean;
-  }>("/api/public/contact");
+  }>("https://aarinkabackend.vercel.app/api/public/contact");
   return data;
 }
 
@@ -261,7 +261,7 @@ export async function fetchAdminSiteSettings(adminKey: string) {
 
 export async function saveSiteSettings(adminKey: string, settings: SiteSettings) {
   const { data } = await api.put<{ ok: boolean; settings: SiteSettings }>(
-    "/api/admin/site",
+    "https://aarinkabackend.vercel.app/api/admin/site",
     settings,
     { headers: { "x-admin-key": adminKey } }
   );
@@ -270,7 +270,7 @@ export async function saveSiteSettings(adminKey: string, settings: SiteSettings)
 
 export async function resetSiteSettings(adminKey: string) {
   const { data } = await api.post<{ ok: boolean; settings: SiteSettings }>(
-    "/api/admin/site/reset",
+    "https://aarinkabackend.vercel.app/api/admin/site/reset",
     {},
     { headers: { "x-admin-key": adminKey } }
   );
