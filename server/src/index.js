@@ -19,7 +19,7 @@ const app = express();
 
 const PORT = Number(process.env.PORT || 4000);
 const MONGODB_URI = process.env.MONGODB_URI || "";
-const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:5173";
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "https://aarnika-frontend.vercel.app/";
 
 app.use(morgan("dev"));
 app.use(express.json({ limit: "1mb" }));
