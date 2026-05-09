@@ -25,7 +25,7 @@ app.use(morgan("dev"));
 app.use(express.json({ limit: "1mb" }));
 app.use(
   cors({
-    origin: [CLIENT_ORIGIN],
+    origin: true,
     credentials: true
   })
 );
