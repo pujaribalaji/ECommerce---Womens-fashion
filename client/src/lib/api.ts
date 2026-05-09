@@ -248,12 +248,12 @@ export const SITE_SETTINGS_FALLBACK: SiteSettings = {
 export const SITE_SETTINGS_QUERY_KEY = ["site-settings"] as const;
 
 export async function fetchSiteSettings() {
-  const { data } = await api.get<{ settings: SiteSettings }>("/api/site");
+  const { data } = await api.get<{ settings: SiteSettings }>("https://aarinkabackend.vercel.app/api/site");
   return data.settings;
 }
 
 export async function fetchAdminSiteSettings(adminKey: string) {
-  const { data } = await api.get<{ settings: SiteSettings }>("/api/admin/site", {
+  const { data } = await api.get<{ settings: SiteSettings }>("https://aarinkabackend.vercel.app/api/admin/site", {
     headers: { "x-admin-key": adminKey }
   });
   return data.settings;
